@@ -1,3 +1,14 @@
+# Franklin's Baby Supplies
+
+A concept e-commerce site built on [vinext](https://github.com/cloudflare/vinext) (Next.js on Cloudflare Workers).
+
+## Deploying
+
+- **Full app, on your own Cloudflare account**: see [`DEPLOYMENT.md`](./DEPLOYMENT.md). Deploys automatically on push to `main` once the two Cloudflare secrets are set.
+- **Static look-and-feel preview, on GitHub Pages**: `pages-preview/` and `vite.pages-preview.config.ts` build just the homepage UI as a plain static bundle (no Worker, no database), published automatically to GitHub Pages on push to `main` via `.github/workflows/deploy-pages-preview.yml`. Requires enabling **Settings → Pages → Source: GitHub Actions** once. This is a visual prototype only; checkout, delivery slots, and the basket are illustrative and do not persist.
+
+---
+
 # vinext-starter
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
