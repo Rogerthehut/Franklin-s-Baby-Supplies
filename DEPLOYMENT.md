@@ -1,9 +1,70 @@
 # Deploying to Cloudflare Workers
 
-This app builds to a Cloudflare Worker (Next.js via `vinext`). It has no
-database or authentication dependency on the site itself, so a plain
-Cloudflare Workers deploy under your own account works without any extra
-setup beyond the two secrets below.
+This app builds to a Cloudflare Worker (Next.js via `vinext`). It uses a real
+D1 database for products and orders, a real R2 bucket for product photos, and
+Stripe for checkout. None of that is optional once you want the catalogue and
+checkout to work in production; the setup below creates the real resources
+and secrets for that.
+
+## Create the D1 database and R2 bucket (one-off, per Cloudflare account)
+
+```
+npx wrangler login
+npx wrangler d1 create franklins-db
+npx wrangler r2 bucket create franklins-images
+```
+
+`wrangler d1 create` prints a `database_id`. Open `vite.config.ts` and
+replace `SITE_CREATOR_PLACEHOLDER_DATABASE_ID` with that real ID, and change
+`database_name`/`bucket_name` in the same file to match what you created
+above (`franklins-db` / `franklins-images`, or your own names). `.openai/hosting.json`
+already has `"d1": "DB", "r2": "BUCKET"`, matching the binding names the code
+expects; leave those two values as they are.
+
+Apply the schema to the real database:
+
+```
+pnpm run build
+npx wrangler d1 execute franklins-db --remote --config dist/server/wrangler.json --file drizzle/0000_brown_stellaris.sql
+```
+
+Optionally seed the starting catalogue (the same 12 products the concept
+preview ships with, with their photos already uploaded to R2):
+
+```
+npx wrangler d1 execute franklins-db --remote --config dist/server/wrangler.json --file drizzle/seed_products.sql
+for f in nappies wipes milk snacks sleepsuit shoes carseat pram; do
+  npx wrangler r2 object put "franklins-images/img_seed_${f}.png" --remote --file "public/seed/${f}.png" --ct image/png
+done
+```
+
+Skip the seed step if you'd rather start with an empty catalogue and add
+products yourself through `/admin`.
+
+## Required secrets
+
+Set these as Worker secrets, once, from your own machine (they persist on
+the Worker across every future deploy, so this isn't part of the CI
+pipeline below):
+
+```
+npx wrangler secret put ADMIN_TOKEN --config dist/server/wrangler.json
+npx wrangler secret put STRIPE_SECRET_KEY --config dist/server/wrangler.json
+npx wrangler secret put STRIPE_WEBHOOK_SECRET --config dist/server/wrangler.json
+```
+
+- `ADMIN_TOKEN`: a password of your choosing that gates `/admin`. Pick
+  something long and random; anyone with it can add, edit and remove
+  products and see order emails.
+- `STRIPE_SECRET_KEY`: from your Stripe dashboard (**Developers → API keys**).
+  Use a test-mode key until you're ready to take real payments, then swap in
+  the live key.
+- `STRIPE_WEBHOOK_SECRET`: create a webhook endpoint in Stripe pointing at
+  `https://<your-worker-url>/api/webhooks/stripe`, listening for the
+  `checkout.session.completed` event, and use the signing secret Stripe
+  gives you. This is what turns a completed Stripe payment into a real order
+  record and stock deduction; checkout will still redirect to Stripe without
+  it, but paid orders won't be recorded on your side.
 
 ## One-off manual deploy
 
@@ -33,11 +94,10 @@ Once both secrets are set, the next push to `main` deploys automatically.
 
 ## Notes
 
-- `.openai/hosting.json` (D1/R2 binding config) was missing from the
-  exported zip and has been recreated with both bindings set to `null`,
-  since the current site doesn't use a database or object storage. Add real
-  binding names there (and matching resources in your Cloudflare account)
-  if you build features that need them.
+- `.openai/hosting.json` declares the D1 and R2 binding names the code
+  expects (`DB` and `BUCKET`). The database ID and bucket name themselves
+  live in `vite.config.ts`, set up in the "Create the D1 database and R2
+  bucket" section above.
 - The repo's README describes an optional "Sign in with ChatGPT" auth
   helper (`app/chatgpt-auth.ts`) and a mock-auth dev mode. Those routes are
   normally injected by the OpenAI "Sites" hosting platform this starter was
