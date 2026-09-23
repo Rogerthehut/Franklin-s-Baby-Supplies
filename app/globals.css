@@ -69,7 +69,7 @@
 @media(max-width:360px){.editorial-hero .hero-actions{flex-direction:column;align-items:stretch}.hero-footer span{max-width:160px}}
 @media(prefers-reduced-motion:reduce){.hero-scene{animation:none!important}.hero-scene-loved{opacity:0!important}}
 
-/* A continuous blend of Franklin's colours reveals with scroll progress. */
+/* A continuous blend of Franklyn's colours reveals with scroll progress. */
 .scroll-ribbon{--ribbon-width:0%;position:fixed;inset:0 0 auto;z-index:100;height:9px;pointer-events:none}
 .scroll-ribbon-length{position:absolute;inset:0;height:9px;background:linear-gradient(90deg,#182bc4 0%,#243bd6 14%,#a6b8f2 29%,#d1f1e3 45%,#f8e994 64%,#f7d5bf 82%,#e99d88 100%);clip-path:inset(0 calc(100% - var(--ribbon-width)) 0 0);box-shadow:0 2px 5px #192a5826;transition:clip-path .08s linear}
 .scroll-ribbon-length::after{content:"";position:absolute;inset:1px 0 auto;height:1px;background:#ffffff80}

@@ -1,4 +1,4 @@
-# Franklin’s Baby Supplies concept
+# Franklyn’s Baby Supplies concept
 
 Source export for the current website concept. This is a Next.js application using the Vinext development and build tooling.
 

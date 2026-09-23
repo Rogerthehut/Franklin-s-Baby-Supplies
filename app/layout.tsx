@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Franklin's Baby Supplies | Concept Preview",
+  title: "Franklyn's Baby Supplies | Concept Preview",
   description: "A fresh shopping concept for baby essentials, repeat deliveries and flexible equipment hire.",
   icons: {
     icon: "/favicon.svg",

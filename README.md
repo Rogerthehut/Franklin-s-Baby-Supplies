@@ -1,4 +1,4 @@
-# Franklin's Baby Supplies
+# Franklyn's Baby Supplies
 
 A concept e-commerce site built on [vinext](https://github.com/cloudflare/vinext) (Next.js on Cloudflare Workers).
 

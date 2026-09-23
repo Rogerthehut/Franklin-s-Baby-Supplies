@@ -43,14 +43,14 @@ function useAdminToken() {
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time client-only read on mount
-    setToken(sessionStorage.getItem("franklinsAdminToken"));
+    setToken(sessionStorage.getItem("franklynsAdminToken"));
   }, []);
   function save(value: string) {
-    sessionStorage.setItem("franklinsAdminToken", value);
+    sessionStorage.setItem("franklynsAdminToken", value);
     setToken(value);
   }
   function clear() {
-    sessionStorage.removeItem("franklinsAdminToken");
+    sessionStorage.removeItem("franklynsAdminToken");
     setToken(null);
   }
   return { token, save, clear };
@@ -69,7 +69,7 @@ export default function AdminPage() {
             if (passwordInput.trim()) save(passwordInput.trim());
           }}
         >
-          <h1>Franklin&apos;s admin</h1>
+          <h1>Franklyn&apos;s admin</h1>
           <p>Enter the admin token to manage products.</p>
           <input
             type="password"
@@ -241,7 +241,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
     <div className="admin-page">
       <header className="admin-header">
         <div>
-          <p className="admin-kicker">FRANKLIN&apos;S · BUSINESS OPS</p>
+          <p className="admin-kicker">FRANKLYN&apos;S · BUSINESS OPS</p>
           <h1>Product catalogue</h1>
         </div>
         <div className="admin-header-actions">

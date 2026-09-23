@@ -10,14 +10,14 @@ and secrets for that.
 
 ```
 npx wrangler login
-npx wrangler d1 create franklins-db
-npx wrangler r2 bucket create franklins-images
+npx wrangler d1 create franklyns-db
+npx wrangler r2 bucket create franklyns-images
 ```
 
 `wrangler d1 create` prints a `database_id`. Open `vite.config.ts` and
 replace `SITE_CREATOR_PLACEHOLDER_DATABASE_ID` with that real ID, and change
 `database_name`/`bucket_name` in the same file to match what you created
-above (`franklins-db` / `franklins-images`, or your own names). `.openai/hosting.json`
+above (`franklyns-db` / `franklyns-images`, or your own names). `.openai/hosting.json`
 already has `"d1": "DB", "r2": "BUCKET"`, matching the binding names the code
 expects; leave those two values as they are.
 
@@ -25,16 +25,16 @@ Apply the schema to the real database:
 
 ```
 pnpm run build
-npx wrangler d1 execute franklins-db --remote --config dist/server/wrangler.json --file drizzle/0000_brown_stellaris.sql
+npx wrangler d1 execute franklyns-db --remote --config dist/server/wrangler.json --file drizzle/0000_brown_stellaris.sql
 ```
 
 Optionally seed the starting catalogue (the same 12 products the concept
 preview ships with, with their photos already uploaded to R2):
 
 ```
-npx wrangler d1 execute franklins-db --remote --config dist/server/wrangler.json --file drizzle/seed_products.sql
+npx wrangler d1 execute franklyns-db --remote --config dist/server/wrangler.json --file drizzle/seed_products.sql
 for f in nappies wipes milk snacks sleepsuit shoes carseat pram; do
-  npx wrangler r2 object put "franklins-images/img_seed_${f}.png" --remote --file "public/seed/${f}.png" --ct image/png
+  npx wrangler r2 object put "franklyns-images/img_seed_${f}.png" --remote --file "public/seed/${f}.png" --ct image/png
 done
 ```
 
@@ -107,7 +107,7 @@ it needs a real Trustpilot Business account:
    variables → Actions → Variables** on this GitHub repo:
    - `VITE_TRUSTPILOT_BUSINESS_UNIT_ID` — the ID from step 2
    - `VITE_TRUSTPILOT_REVIEW_URL` — your public Trustpilot review page,
-     e.g. `https://www.trustpilot.com/review/franklinsbabysupplies.co.uk`
+     e.g. `https://www.trustpilot.com/review/franklynsbabysupplies.co.uk`
 4. For local dev, add the same two as `VITE_TRUSTPILOT_BUSINESS_UNIT_ID=...`
    and `VITE_TRUSTPILOT_REVIEW_URL=...` in a `.env.local` file at the repo
    root (already gitignored via `.env*`).
