@@ -74,3 +74,60 @@
 .scroll-ribbon-length{position:absolute;inset:0;height:9px;background:linear-gradient(90deg,#182bc4 0%,#243bd6 14%,#a6b8f2 29%,#d1f1e3 45%,#f8e994 64%,#f7d5bf 82%,#e99d88 100%);clip-path:inset(0 calc(100% - var(--ribbon-width)) 0 0);box-shadow:0 2px 5px #192a5826;transition:clip-path .08s linear}
 .scroll-ribbon-length::after{content:"";position:absolute;inset:1px 0 auto;height:1px;background:#ffffff80}
 @media(prefers-reduced-motion:reduce){.scroll-ribbon-length{transition:none}}
+
+
+/* Franklyn's lighter editorial palette: warm paper, restrained colour and expressive serif type. */
+:root{--blue:#354b45;--navy:#30443e;--sky:#f4f0eb;--cream:#faf8f4;--butter:#e9d7b4;--mint:#e8ece3;--peach:#eedbd3;--ink:#30443e;--line:#e2ded7;--foreground:#30443e;--muted-foreground:#64716a;--ring:#354b45}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--cream)}
+.wordmark,.hero h1,.section-hero h1,.account-heading h1,.catalogue-heading h2,.delivery-section h2,.journey-strip b,.product-info h3,.product-card h3,.detail-panel [data-slot=dialog-title],.basket-sheet [data-slot=sheet-title],.checkout-dialog [data-slot=dialog-title],.basket-empty h3{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.045em}
+.wordmark{letter-spacing:-.055em;color:var(--ink)}.wordmark-icon{border-radius:50%;font-family:Georgia,serif;font-weight:400;background:#354b45}
+.hero h1,.section-hero h1,.account-heading h1{line-height:1.04;letter-spacing:-.055em}.hero h1 i,.section-hero h1 i{font-style:italic;color:#a3796c}
+.hero-art{background:#e8e4dc}.hero-sticker{font-family:Georgia,serif;font-weight:400;border-radius:50%;color:var(--ink)}
+.product-card{border-color:var(--line);border-radius:6px;box-shadow:0 4px 20px #30443e09}.image-tone-0{background:#f1ece5}.image-tone-1{background:#e9ede5}.image-tone-2{background:#f3e8e2}.image-tone-3{background:#f2eddf}
+.category-nav button.selected,.basket-summary>button,.detail-add,.hero-actions button:first-child,.section-hero>button{background:#354b45;color:white}.category-nav button{border-radius:3px}.catalogue-search,.catalogue-tools>div label,.choice{border-color:#d8d5cc}
+.editorial-hero{background:#656f63}.editorial-hero::after{background:linear-gradient(90deg,rgba(37,52,46,.88),rgba(37,52,46,.68) 32%,rgba(37,52,46,.1) 72%)}.editorial-hero h1{letter-spacing:-.055em;text-shadow:0 2px 18px #24332d44}.editorial-hero h1 i{color:#e9d7b4;font-style:italic}.editorial-hero .kicker{color:#f3e9d7}.editorial-hero .hero-actions button:first-child{background:#faf8f4;color:#30443e}.editorial-hero .hero-actions button:last-child{background:#30443e33}
+.repeat-hero{background:linear-gradient(105deg,#eef0e9 0%,#eef0e9 58%,#d9e2d7 58%,#e7ebe1 100%)}.hire-hero{background:linear-gradient(105deg,#f5ebe5 0%,#f5ebe5 58%,#e8d7cb 58%,#f2e3d9 100%)}
+.scroll-ribbon-length{background:linear-gradient(90deg,#354b45,#819087 23%,#e8ece3 43%,#e9d7b4 65%,#eedbd3 84%,#bfa397)}
+@media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(37,52,46,.94),rgba(37,52,46,.66) 42%,rgba(37,52,46,.08) 78%)}}
+
+/* The cover and footer share the same warm editorial colour story. */
+.editorial-hero{background:#c5c9bb}
+.hero-scene{filter:sepia(.32) saturate(.62) hue-rotate(-12deg)}
+.hero-scene::after{content:"";position:absolute;inset:0;background:#cbbda8;mix-blend-mode:color;opacity:.42;pointer-events:none}
+.editorial-hero::after{background:linear-gradient(90deg,rgba(37,52,46,.87) 0%,rgba(37,52,46,.67) 28%,rgba(37,52,46,.18) 54%,transparent 78%)}
+.editorial-hero h1 i{color:#f1dfbe}
+footer{background:#f0eee8;color:#30443e;border-top:1px solid #dedbd2}
+footer .footer-brand{font-family:Georgia,'Times New Roman',serif;font-size:clamp(38px,4vw,52px);font-weight:400;letter-spacing:-.055em}
+footer .footer-brand span{color:#ad8271}
+footer p,footer button{color:#53645c}
+footer b{color:#30443e}
+footer button:hover{text-decoration:underline;text-underline-offset:4px;color:#30443e}
+footer>small{border-top-color:#d2d3ca;color:#66736b}
+@media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(37,52,46,.94) 0%,rgba(37,52,46,.7) 38%,rgba(37,52,46,.08) 78%)}}
+
+/* Airy cover treatment across both rotating photographs. */
+.editorial-hero{background:#f5f1ea;color:#30443e}
+.hero-scene{filter:brightness(1.12) contrast(.92) saturate(.72);}
+.hero-scene::after{background:#f7f1e8;mix-blend-mode:screen;opacity:.16}
+.editorial-hero::after{background:linear-gradient(90deg,rgba(250,248,244,.97) 0%,rgba(250,248,244,.91) 22%,rgba(250,248,244,.66) 39%,rgba(250,248,244,.12) 65%,transparent 82%)}
+.editorial-hero .kicker,.editorial-hero h1,.editorial-hero .hero-content>p:not(.kicker),.hero-footer{color:#30443e;text-shadow:none}
+.editorial-hero h1 i{color:#96715f}
+.editorial-hero .hero-actions button:first-child{background:#354b45;color:#fff}
+.editorial-hero .hero-actions button:last-child{border-color:#354b45;color:#30443e;background:#faf8f4c9;backdrop-filter:blur(4px)}
+.hero-footer button{background:#faf8f4dd;border-color:#30443e66;color:#30443e}
+@media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(250,248,244,.98) 0%,rgba(250,248,244,.93) 39%,rgba(250,248,244,.18) 77%,transparent 100%)}}
+
+/* Original light photographs need only a restrained legibility wash. */
+.hero-scene-everyday{background-image:url('/hero-light.webp')}
+.hero-scene-loved{background-image:url('/hero-loved-light.webp')}
+.hero-scene{filter:none}
+.hero-scene::after{display:none}
+.editorial-hero::after{background:linear-gradient(90deg,rgba(250,248,244,.64) 0%,rgba(250,248,244,.26) 34%,transparent 65%)}
+@media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(250,248,244,.84) 0%,rgba(250,248,244,.42) 43%,transparent 82%)}}
+/* Return the header emblem to Franklyn's original tilted square silhouette. */
+.wordmark-icon{border-radius:13px;transform:rotate(-6deg);font-family:Arial,Helvetica,sans-serif;font-weight:800;letter-spacing:-.12em;background:#354b45}
+.wordmark-icon span{color:#c99d80}
+
+/* Delicate numbered markers from the supplied reference. */
+.journey-strip span{font-family:Georgia,'Times New Roman',serif;font-size:14px;font-weight:400;letter-spacing:.025em;color:#758f90;white-space:nowrap}
+.journey-strip span::after{content:' /';font-family:Georgia,'Times New Roman',serif}

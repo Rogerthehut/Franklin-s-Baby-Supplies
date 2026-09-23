@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="17" fill="#182bc4"/><text x="17" y="47" font-family="Arial,sans-serif" font-weight="bold" font-size="48" fill="#fff">f</text><circle cx="45" cy="43" r="6" fill="#f9b078"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72">
+  <g transform="rotate(-6 32 32)">
+    <rect x="6" y="5" width="52" height="52" rx="16" fill="#354b45"/>
+    <text x="23" y="46" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="45" fill="#fff">f</text>
+    <rect x="42" y="61" width="8" height="8" fill="#c99d80"/>
+  </g>
+</svg>
