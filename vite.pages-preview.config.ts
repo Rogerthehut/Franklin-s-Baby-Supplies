@@ -9,7 +9,7 @@ import path from "node:path";
 // deployable app (see DEPLOYMENT.md for that).
 export default defineConfig({
   root: path.resolve(__dirname, "pages-preview"),
-  base: "/Franklin-s-Baby-Supplies/",
+  base: "/Franklyn-s-Baby-Supplies/",
   publicDir: path.resolve(__dirname, "public"),
   resolve: {
     alias: {
