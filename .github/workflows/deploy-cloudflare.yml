@@ -25,6 +25,9 @@ jobs:
 
       - name: Build
         run: pnpm run build
+        env:
+          VITE_TRUSTPILOT_BUSINESS_UNIT_ID: ${{ vars.VITE_TRUSTPILOT_BUSINESS_UNIT_ID }}
+          VITE_TRUSTPILOT_REVIEW_URL: ${{ vars.VITE_TRUSTPILOT_REVIEW_URL }}
 
       - name: Deploy
         run: npx wrangler deploy --config dist/server/wrangler.json
