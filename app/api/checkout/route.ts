@@ -1,6 +1,7 @@
 import { inArray } from "drizzle-orm";
 import { getDb } from "../../../db";
 import { products } from "../../../db/schema";
+import { getCurrentCustomer } from "../../../lib/auth";
 import { resolveDeliveryMethod } from "../../../lib/delivery-zones";
 import { getStripe } from "../../../lib/stripe";
 
@@ -36,6 +37,7 @@ export async function POST(request: Request) {
     }
 
     const db = getDb();
+    const customer = await getCurrentCustomer(request, db);
     const productIds = [...new Set(lines.map((line) => line.productId))];
     const dbProducts = await db
       .select()
@@ -98,6 +100,7 @@ export async function POST(request: Request) {
         postcode,
         deliverySlot,
         deliveryMethod: deliveryMethod ?? "",
+        customerId: customer ? String(customer.id) : "",
       },
     });
 

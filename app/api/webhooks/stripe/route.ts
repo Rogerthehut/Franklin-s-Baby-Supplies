@@ -54,6 +54,8 @@ export async function POST(request: Request) {
     items = [];
   }
 
+  const customerId = session.metadata?.customerId ? Number(session.metadata.customerId) : null;
+
   const [order] = await db
     .insert(orders)
     .values({
@@ -62,6 +64,7 @@ export async function POST(request: Request) {
         typeof session.payment_intent === "string" ? session.payment_intent : null,
       status: "paid",
       customerEmail: session.customer_details?.email ?? null,
+      customerId: customerId && Number.isInteger(customerId) ? customerId : null,
       totalCents: session.amount_total ?? 0,
       postcode: session.metadata?.postcode || null,
       deliverySlot: session.metadata?.deliverySlot || null,

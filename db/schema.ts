@@ -27,6 +27,7 @@ export const orders = sqliteTable("orders", {
   stripePaymentIntentId: text("stripe_payment_intent_id"),
   status: text("status").notNull().default("pending"),
   customerEmail: text("customer_email"),
+  customerId: integer("customer_id").references(() => customers.id),
   totalCents: integer("total_cents").notNull().default(0),
   postcode: text("postcode"),
   deliverySlot: text("delivery_slot"),
@@ -86,4 +87,43 @@ export const forumReplies = sqliteTable("forum_replies", {
   body: text("body").notNull(),
   authorName: text("author_name").notNull(),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const customers = sqliteTable("customers", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  name: text("name"),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const customerSessions = sqliteTable("customer_sessions", {
+  id: text("id").primaryKey(),
+  customerId: integer("customer_id")
+    .notNull()
+    .references(() => customers.id),
+  expiresAt: text("expires_at").notNull(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const customerFavourites = sqliteTable("customer_favourites", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  customerId: integer("customer_id")
+    .notNull()
+    .references(() => customers.id),
+  productId: integer("product_id")
+    .notNull()
+    .references(() => products.id),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+// One saved basket per customer; overwritten wholesale on every autosave
+// rather than tracked as individual line rows, since it's just a resume
+// point, not an audit trail.
+export const customerBaskets = sqliteTable("customer_baskets", {
+  customerId: integer("customer_id")
+    .primaryKey()
+    .references(() => customers.id),
+  linesJson: text("lines_json").notNull().default("[]"),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
