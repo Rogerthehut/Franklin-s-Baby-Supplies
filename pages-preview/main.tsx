@@ -7,6 +7,7 @@ import TermsPage from "@/app/terms/page";
 import CookiesPage from "@/app/cookies/page";
 import ReturnsPolicyPage from "@/app/returns-policy/page";
 import SitemapPage from "@/app/sitemap/page";
+import { CookieBanner } from "@/components/cookie-banner";
 import "@/app/globals.css";
 
 // This static preview has no server, so it can't route requests itself.
@@ -49,5 +50,6 @@ const Page = currentPage();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Page />
+    <CookieBanner />
   </StrictMode>,
 );

@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import {StaticHeader,StaticFooter} from "@/components/static-page-chrome";
 import {DraftNotice} from "@/components/draft-notice";
+import {CookiePreferences} from "@/components/cookie-preferences";
 
 export const metadata: Metadata={
  title:"Cookies policy · Franklyn's Baby Supplies",
@@ -27,7 +28,8 @@ export default function CookiesPage(){
     <p>This site doesn't currently use any analytics or advertising cookies. If that changes, this page will be updated first and, where required, you'll be asked for consent before anything loads.</p>
 
     <h2>Managing cookies</h2>
-    <p>Most browsers let you block or delete cookies through their settings. Since this site currently sets none of its own, there's nothing to opt out of beyond the third-party Trustpilot script described above.</p>
+    <p>Most browsers let you block or delete cookies through their settings. Since this site currently sets none of its own, there's nothing to opt out of beyond the third-party Trustpilot script described above. You can also change your choice for this site any time below.</p>
+    <CookiePreferences/>
     <p className="legal-contact">Questions about this policy? Email <a href="mailto:hello@franklynsbabysupplies.co.uk">hello@franklynsbabysupplies.co.uk</a></p>
    </main>
    <StaticFooter/>

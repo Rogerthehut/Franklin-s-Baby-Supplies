@@ -1,6 +1,7 @@
 "use client";
 
-import {useEffect,useRef} from "react";
+import {useEffect,useRef,useState} from "react";
+import {getCookieConsent,onCookieConsentChange} from "@/lib/cookie-consent";
 
 const BUSINESS_UNIT_ID=import.meta.env.VITE_TRUSTPILOT_BUSINESS_UNIT_ID as string|undefined;
 const REVIEW_URL=import.meta.env.VITE_TRUSTPILOT_REVIEW_URL as string|undefined;
@@ -13,8 +14,10 @@ const TEMPLATE_ID="53aa8807dec7e10d38f59f32";
 
 export function TrustpilotWidget(){
  const ref=useRef<HTMLDivElement>(null);
+ const[consented,setConsented]=useState(()=>getCookieConsent()==="all");
+ useEffect(()=>onCookieConsentChange(value=>setConsented(value==="all")),[]);
  useEffect(()=>{
-  if(!BUSINESS_UNIT_ID)return;
+  if(!BUSINESS_UNIT_ID||!consented)return;
   const scriptId="trustpilot-bootstrap";
   const init=()=>{if(ref.current&&window.Trustpilot)window.Trustpilot.loadFromElement(ref.current,true)};
   if(window.Trustpilot){init();return}
@@ -28,9 +31,9 @@ export function TrustpilotWidget(){
   script.async=true;
   script.onload=init;
   document.body.appendChild(script);
- },[]);
+ },[consented]);
 
- if(!BUSINESS_UNIT_ID)return null;
+ if(!BUSINESS_UNIT_ID||!consented)return null;
 
  return (
   <div
