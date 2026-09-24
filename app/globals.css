@@ -131,3 +131,7 @@ footer>small{border-top-color:#d2d3ca;color:#66736b}
 /* Delicate numbered markers from the supplied reference. */
 .journey-strip span{font-family:Georgia,'Times New Roman',serif;font-size:14px;font-weight:400;letter-spacing:.025em;color:#758f90;white-space:nowrap}
 .journey-strip span::after{content:' /';font-family:Georgia,'Times New Roman',serif}
+
+/* Recolour the basket/status toast from the old navy to the new palette. */
+.toast{background:#30443e;box-shadow:0 10px 25px #1d2c2733}
+.toast button{color:#faf8f4}
