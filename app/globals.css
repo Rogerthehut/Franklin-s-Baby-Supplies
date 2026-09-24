@@ -135,3 +135,51 @@ footer>small{border-top-color:#d2d3ca;color:#66736b}
 /* Recolour the basket/status toast from the old navy to the new palette. */
 .toast{background:#30443e;box-shadow:0 10px 25px #1d2c2733}
 .toast button{color:#faf8f4}
+
+/* Shared tappable choice buttons for the onboarding and returns wizards. */
+.wizard-choice{background:#fff;border:1px solid #cfd8ea;border-radius:9px;padding:14px 16px;font-size:14px;font-weight:700;color:#3d4c66;text-align:center}
+.wizard-choice.selected{border:2px solid #354b45;background:#f1f4f0;color:#30443e}
+
+/* Baby-profile onboarding wizard. */
+.onboarding-dialog{background:#fff!important;max-width:420px!important}
+.onboarding-progress{display:flex;gap:6px;margin:4px 0 18px}
+.onboarding-progress span{height:4px;flex:1;border-radius:2px;background:#e2ded7}
+.onboarding-progress span.filled{background:#354b45}
+.onboarding-choices{display:grid;gap:10px}
+.onboarding-actions{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.onboarding-back{border:0;background:none;color:#64716a;font-size:13px;font-weight:700}
+.onboarding-skip{border:0;background:none;color:#758f90;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;margin-left:auto}
+
+/* Delivery method note shown once a postcode is checked. */
+.delivery-method-note{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#354b45;background:#f1f4f0;border-radius:8px;padding:10px 12px;margin:14px 0 0}
+
+/* Returns & replacements wizard. */
+.returns-dialog{background:#fff!important;max-width:480px!important}
+.returns-step{display:grid;gap:14px;margin-top:6px}
+.returns-step label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#4a5b5a}
+.returns-step input,.returns-step select,.returns-step textarea{border:1px solid #cfd8ea;border-radius:8px;padding:11px 13px;font-size:14px;color:#30443e;font-family:inherit}
+.returns-error{color:#a3452f;font-size:13px;font-weight:700;margin:0}
+.returns-items{display:grid;gap:8px}
+.returns-item{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #cfd8ea;border-radius:9px;padding:13px 16px;font-size:13px;text-align:left}
+.returns-item.selected-choice{border:2px solid #354b45;background:#f1f4f0}
+.returns-selected{font-size:13px;color:#64716a;margin:0}
+.returns-resolution{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.returns-confirm{text-align:center;color:#354b45}
+.returns-confirm svg{color:#354b45;margin:0 auto 10px}
+.returns-confirm p{color:#4a5b5a;font-size:14px;line-height:1.5;margin:0 0 18px}
+
+/* Feedback / idea board. */
+.feedback-page{padding:75px max(4vw,20px) 110px;max-width:760px;margin:0 auto}
+.feedback-heading h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(33px,3.3vw,48px);margin:0 0 12px}
+.feedback-heading p:not(.kicker){color:#64716a;line-height:1.6;max-width:520px}
+.feedback-form{background:#fff;border:1px solid #dfe4eb;border-radius:16px;padding:24px;display:grid;gap:14px;margin:28px 0 36px}
+.feedback-form label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#4a5b5a}
+.feedback-form input,.feedback-form textarea{border:1px solid #cfd8ea;border-radius:8px;padding:11px 13px;font-size:14px;color:#30443e;font-family:inherit}
+.feedback-form button{justify-self:start}
+.feedback-list{display:grid;gap:10px}
+.feedback-empty{color:#64716a;text-align:center;padding:30px 0}
+.feedback-row{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid #dfe4eb;border-radius:12px;padding:16px 18px}
+.feedback-row strong{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:16px;color:#30443e}
+.feedback-row p{margin:4px 0 0;font-size:13px;color:#64716a;line-height:1.5}
+.feedback-vote{display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid #cfd8ea;border-radius:9px;padding:8px 12px;color:#4a5b5a;font-size:14px;font-weight:800;flex:none}
+.feedback-vote.voted{border-color:#354b45;background:#f1f4f0;color:#354b45}
