@@ -10,6 +10,20 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Franklyn's Baby Supplies",
+  url: "https://franklynsbabysupplies.co.uk/",
+  logo: "https://franklynsbabysupplies.co.uk/favicon.svg",
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "hello@franklynsbabysupplies.co.uk",
+    contactType: "customer service",
+    areaServed: "GB",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -17,7 +31,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+      </body>
     </html>
   );
 }
