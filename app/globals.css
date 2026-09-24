@@ -113,8 +113,8 @@ footer>small{border-top-color:#d2d3ca;color:#66736b}
 .editorial-hero::after{background:linear-gradient(90deg,rgba(250,248,244,.97) 0%,rgba(250,248,244,.91) 22%,rgba(250,248,244,.66) 39%,rgba(250,248,244,.12) 65%,transparent 82%)}
 .editorial-hero .kicker,.editorial-hero h1,.editorial-hero .hero-content>p:not(.kicker),.hero-footer{color:#30443e;text-shadow:none}
 .editorial-hero h1 i{color:#96715f}
-.editorial-hero .hero-actions button:first-child{background:#354b45;color:#fff}
-.editorial-hero .hero-actions button:last-child{border-color:#354b45;color:#30443e;background:#faf8f4c9;backdrop-filter:blur(4px)}
+.editorial-hero .hero-actions button:first-child{background:#354b45d9;color:#fff;backdrop-filter:blur(4px)}
+.editorial-hero .hero-actions button:last-child{border-color:#354b45;color:#30443e;background:#faf8f4a3;backdrop-filter:blur(4px)}
 .hero-footer button{background:#faf8f4dd;border-color:#30443e66;color:#30443e}
 @media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(250,248,244,.98) 0%,rgba(250,248,244,.93) 39%,rgba(250,248,244,.18) 77%,transparent 100%)}}
 
