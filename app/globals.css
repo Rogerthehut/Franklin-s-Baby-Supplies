@@ -184,3 +184,29 @@ footer>small{border-top-color:#d2d3ca;color:#66736b}
 .feedback-row p{margin:4px 0 0;font-size:13px;color:#64716a;line-height:1.5}
 .feedback-vote{display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid #cfd8ea;border-radius:9px;padding:8px 12px;color:#4a5b5a;font-size:14px;font-weight:800;flex:none}
 .feedback-vote.voted{border-color:#354b45;background:#f1f4f0;color:#354b45}
+
+/* Static content pages: FAQ, returns policy, cookies, privacy, terms. */
+.static-page{min-height:100vh;display:flex;flex-direction:column;background:var(--cream)}
+.static-header{height:78px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(4vw,24px);border-bottom:1px solid var(--line)}
+.static-back{display:flex;align-items:center;gap:7px;color:#4a5b5a;font-size:13px;font-weight:700}
+.legal-page{flex:1;max-width:720px;margin:0 auto;padding:70px max(5vw,24px) 100px;width:100%}
+.legal-page h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.04em;font-size:clamp(32px,4vw,46px);margin:0 0 18px}
+.legal-page h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.03em;font-size:22px;margin:34px 0 10px;color:#30443e}
+.legal-page p{color:#4a5b5a;line-height:1.65;font-size:15px;margin:0 0 14px}
+.legal-page ul{color:#4a5b5a;line-height:1.65;font-size:15px;padding-left:20px;margin:0 0 14px}
+.legal-page li{margin-bottom:8px}
+.legal-page a{color:#354b45;text-decoration:underline;text-underline-offset:3px}
+.legal-lead{font-size:17px;color:#30443e;max-width:560px}
+.draft-notice{background:#f7ede1;border:1px solid #e6d3b8;border-radius:10px;padding:14px 16px;font-size:13px;color:#7a5a2e;line-height:1.55;margin:0 0 28px}
+.legal-contact{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);font-size:14px}
+.faq-list{display:grid;gap:10px;margin-top:28px}
+.faq-item{background:#fff;border:1px solid #dfe4eb;border-radius:12px;padding:18px 20px}
+.faq-item summary{cursor:pointer;font-weight:700;color:#30443e;font-size:15px;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';float:right;color:#758f90;font-size:18px}
+.faq-item[open] summary::after{content:'\2212'}
+.faq-item p{margin-top:12px}
+.static-footer{border-top:1px solid var(--line);padding:30px max(5vw,24px);display:flex;flex-direction:column;gap:12px}
+.static-footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+.static-footer nav a{color:#4a5b5a;font-size:13px;font-weight:700}
+.static-footer small{color:#8a978f;font-size:12px}
