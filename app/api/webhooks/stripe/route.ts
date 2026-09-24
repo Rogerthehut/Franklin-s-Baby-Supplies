@@ -63,6 +63,9 @@ export async function POST(request: Request) {
       status: "paid",
       customerEmail: session.customer_details?.email ?? null,
       totalCents: session.amount_total ?? 0,
+      postcode: session.metadata?.postcode || null,
+      deliverySlot: session.metadata?.deliverySlot || null,
+      deliveryMethod: session.metadata?.deliveryMethod || null,
     })
     .returning();
 

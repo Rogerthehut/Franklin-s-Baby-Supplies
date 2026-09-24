@@ -1,6 +1,7 @@
 import { inArray } from "drizzle-orm";
 import { getDb } from "../../../db";
 import { products } from "../../../db/schema";
+import { resolveDeliveryMethod } from "../../../lib/delivery-zones";
 import { getStripe } from "../../../lib/stripe";
 
 type BasketLine = { productId: number; quantity: number; mode: "once" | "repeat" | "hire" };
@@ -15,8 +16,15 @@ export async function POST(request: Request) {
   }
 
   try {
-    const payload = (await request.json()) as { items?: BasketLine[] };
+    const payload = (await request.json()) as {
+      items?: BasketLine[];
+      postcode?: string;
+      deliverySlot?: string;
+    };
     const lines = Array.isArray(payload.items) ? payload.items : [];
+    const postcode = typeof payload.postcode === "string" ? payload.postcode.trim().toUpperCase() : "";
+    const deliverySlot = typeof payload.deliverySlot === "string" ? payload.deliverySlot.trim() : "";
+    const deliveryMethod = postcode ? resolveDeliveryMethod(postcode) : null;
 
     if (!lines.length) {
       return Response.json({ error: "Your basket is empty." }, { status: 400 });
@@ -85,7 +93,12 @@ export async function POST(request: Request) {
       line_items: lineItems,
       success_url: `${origin}/?checkout=success`,
       cancel_url: `${origin}/?checkout=cancelled`,
-      metadata: { items: JSON.stringify(metadataItems) },
+      metadata: {
+        items: JSON.stringify(metadataItems),
+        postcode,
+        deliverySlot,
+        deliveryMethod: deliveryMethod ?? "",
+      },
     });
 
     return Response.json({ url: session.url });
