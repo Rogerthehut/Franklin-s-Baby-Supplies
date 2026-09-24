@@ -1,5 +1,6 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { X } from "lucide-react";
 import Home from "@/app/page";
 import FaqPage from "@/app/faq/page";
 import PrivacyPage from "@/app/privacy/page";
@@ -36,8 +37,49 @@ function normalizedPath(pathname: string): string {
   return path || "/";
 }
 
+const PREVIEW_MESSAGE = "Concept preview — this needs the live backend to work.";
+
+// Paths that are only reachable via a real backend, which this static build
+// doesn't have. There's no meaningful page to show for these, so link clicks
+// to them are turned into the same preview toast instead of a confusing blank
+// or fallen-back-to-homepage result.
+const BACKEND_ONLY_PATHS = ["/admin"];
+
+// Background writes that already fail silently by design (an optimistic
+// heart-toggle, an autosaved basket, a vote, a logout that already cleared
+// local state regardless) shouldn't also throw a toast on every occurrence —
+// that would just be noise. Checkout already shows its own clear toast on
+// failure. Everything else that mutates data (a deliberate "submit" click)
+// is worth surfacing.
+const SILENT_MUTATIONS: RegExp[] = [
+  /^\/api\/account\/favourites/,
+  /^\/api\/account\/basket$/,
+  /^\/api\/account\/logout$/,
+  /^\/api\/checkout$/,
+  /^\/api\/feedback\/\d+\/vote$/,
+];
+
+function isToastworthyFailure(url: string, method: string): boolean {
+  if (method === "GET" || method === "HEAD") return false;
+  let pathname: string;
+  try {
+    pathname = new URL(url, window.location.origin).pathname;
+  } catch {
+    return false;
+  }
+  if (!pathname.includes("/api/")) return false;
+  return !SILENT_MUTATIONS.some((pattern) => pattern.test(pathname));
+}
+
 function App() {
   const [pathname, setPathname] = useState(() => window.location.pathname);
+  const [toast, setToast] = useState("");
+
+  useEffect(() => {
+    if (!toast) return;
+    const timeout = setTimeout(() => setToast(""), 5000);
+    return () => clearTimeout(timeout);
+  }, [toast]);
 
   useEffect(() => {
     const onPopState = () => setPathname(window.location.pathname);
@@ -60,8 +102,15 @@ function App() {
       const href = link?.getAttribute("href") || "";
       if (!href.startsWith("/") || href.startsWith("//")) return;
 
+      const [path] = href.split("#");
+      if (BACKEND_ONLY_PATHS.includes(path)) {
+        event.preventDefault();
+        setToast(PREVIEW_MESSAGE);
+        return;
+      }
+
       event.preventDefault();
-      const [path, hash] = href.split("#");
+      const hash = href.split("#")[1];
       const nextUrl = BASE + path + (hash ? `#${hash}` : "");
       window.history.pushState({}, "", nextUrl);
       setPathname(BASE + path);
@@ -75,11 +124,43 @@ function App() {
     return () => document.removeEventListener("click", onClick);
   }, []);
 
+  useEffect(() => {
+    // This preview has no backend at all, so any real write (signing up,
+    // posting to the forum, submitting a return) will fail here even though
+    // it works on the real deployment. Surface that plainly instead of
+    // leaving the request to fail invisibly or with a generic inline error.
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
+      const method = (init?.method ?? (input instanceof Request ? input.method : "GET")).toUpperCase();
+      const toastworthy = isToastworthyFailure(url, method);
+      try {
+        const response = await originalFetch(input, init);
+        if (toastworthy && !response.ok) setToast(PREVIEW_MESSAGE);
+        return response;
+      } catch (error) {
+        if (toastworthy) setToast(PREVIEW_MESSAGE);
+        throw error;
+      }
+    };
+    return () => {
+      window.fetch = originalFetch;
+    };
+  }, []);
+
   const Page = PAGES[normalizedPath(pathname)] ?? Home;
   return (
     <>
       <Page />
       <CookieBanner />
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+          <button onClick={() => setToast("")} aria-label="Dismiss notification">
+            <X size={15} />
+          </button>
+        </div>
+      )}
     </>
   );
 }
