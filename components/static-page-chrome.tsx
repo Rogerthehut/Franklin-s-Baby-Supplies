@@ -2,7 +2,7 @@ import {ArrowLeft} from "lucide-react";
 
 const LEGAL_LINKS=[
  {href:"/faq",label:"FAQs"},
- {href:"/returns-policy",label:"Returns & complaints"},
+ {href:"/returns-policy",label:"Returns"},
  {href:"/privacy",label:"Privacy policy"},
  {href:"/cookies",label:"Cookies policy"},
  {href:"/terms",label:"Terms of use"},
