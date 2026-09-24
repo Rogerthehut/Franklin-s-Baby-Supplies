@@ -7,6 +7,7 @@ import TermsPage from "@/app/terms/page";
 import CookiesPage from "@/app/cookies/page";
 import ReturnsPolicyPage from "@/app/returns-policy/page";
 import SitemapPage from "@/app/sitemap/page";
+import ForumPage from "@/app/forum/page";
 import { CookieBanner } from "@/components/cookie-banner";
 import "@/app/globals.css";
 
@@ -25,6 +26,7 @@ const PAGES: Record<string, () => JSX.Element> = {
   "/cookies": CookiesPage,
   "/returns-policy": ReturnsPolicyPage,
   "/sitemap": SitemapPage,
+  "/forum": ForumPage,
 };
 
 function normalizedPath(pathname: string): string {
