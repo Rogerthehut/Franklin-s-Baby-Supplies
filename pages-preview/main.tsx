@@ -102,15 +102,24 @@ function App() {
       const href = link?.getAttribute("href") || "";
       if (!href.startsWith("/") || href.startsWith("//")) return;
 
-      const [path] = href.split("#");
+      const [path, hash] = href.split("#");
       if (BACKEND_ONLY_PATHS.includes(path)) {
         event.preventDefault();
         setToast(PREVIEW_MESSAGE);
         return;
       }
 
+      if (!(normalizedPath(path) in PAGES)) {
+        // Not one of this preview's SPA pages — e.g. the real /sitemap.xml
+        // file linked from the sitemap page's body text. Let it actually
+        // load rather than rendering it as a page, just with the base path
+        // fixed up so it doesn't escape the site's subpath.
+        event.preventDefault();
+        window.location.href = BASE + href;
+        return;
+      }
+
       event.preventDefault();
-      const hash = href.split("#")[1];
       const nextUrl = BASE + path + (hash ? `#${hash}` : "");
       window.history.pushState({}, "", nextUrl);
       setPathname(BASE + path);
