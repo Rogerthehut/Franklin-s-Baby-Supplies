@@ -206,6 +206,12 @@ footer>small{border-top-color:#d2d3ca;color:#66736b}
 .faq-item summary::after{content:'+';float:right;color:#758f90;font-size:18px}
 .faq-item[open] summary::after{content:'\2212'}
 .faq-item p{margin-top:12px}
+.sitemap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:18px 0 28px}
+.legal-page a.sitemap-card{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid #dfe4eb;border-radius:12px;padding:16px 18px;text-decoration:none;transition:border-color .15s,box-shadow .15s}
+.sitemap-card:hover{border-color:#354b45;box-shadow:0 6px 18px #30443e12}
+.sitemap-icon{flex:none;width:38px;height:38px;border-radius:50%;background:var(--mint);color:#354b45;display:grid;place-items:center}
+.sitemap-card b{display:block;color:#30443e;font-size:15px;font-weight:700}
+.sitemap-card small{display:block;color:#697b73;font-size:12px;line-height:1.5;margin-top:4px}
 .static-footer{border-top:1px solid var(--line);padding:30px max(5vw,24px);display:flex;flex-direction:column;gap:12px}
 .static-footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}
 .static-footer nav a{color:#4a5b5a;font-size:13px;font-weight:700}

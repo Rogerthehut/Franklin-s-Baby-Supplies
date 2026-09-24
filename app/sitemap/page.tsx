@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import {StaticHeader,StaticFooter} from "@/components/static-page-chrome";
+import {Home,ShoppingBasket,HelpCircle,RotateCcw,Lock,Cookie,FileText} from "lucide-react";
 
 export const metadata: Metadata={
  title:"Sitemap · Franklyn's Baby Supplies",
@@ -10,18 +11,18 @@ const SITEMAP_GROUPS=[
  {
   heading:"Shop",
   links:[
-   {href:"/",label:"Home"},
-   {href:"/#catalogue",label:"Shop all products"},
+   {href:"/",label:"Home",description:"Nappies, feeding, clothing, prams and more.",icon:Home},
+   {href:"/#catalogue",label:"Shop all products",description:"Jump straight to the full catalogue.",icon:ShoppingBasket},
   ],
  },
  {
   heading:"Support & policies",
   links:[
-   {href:"/faq",label:"FAQs"},
-   {href:"/returns-policy",label:"Returns & complaints"},
-   {href:"/privacy",label:"Privacy policy"},
-   {href:"/cookies",label:"Cookies policy"},
-   {href:"/terms",label:"Terms of use"},
+   {href:"/faq",label:"FAQs",description:"Answers to common questions about delivery, repeat boxes and hire.",icon:HelpCircle},
+   {href:"/returns-policy",label:"Returns & complaints",description:"Your right to cancel, and how refunds and exchanges work.",icon:RotateCcw},
+   {href:"/privacy",label:"Privacy policy",description:"What we collect, and why.",icon:Lock},
+   {href:"/cookies",label:"Cookies policy",description:"The short, honest list of cookies we use.",icon:Cookie},
+   {href:"/terms",label:"Terms of use",description:"The plain terms for shopping with us.",icon:FileText},
   ],
  },
 ];
@@ -37,9 +38,14 @@ export default function SitemapPage(){
     {SITEMAP_GROUPS.map(g=>
      <div key={g.heading}>
       <h2>{g.heading}</h2>
-      <ul>
-       {g.links.map(l=><li key={l.href}><a href={l.href}>{l.label}</a></li>)}
-      </ul>
+      <div className="sitemap-grid">
+       {g.links.map(l=>
+        <a key={l.href} href={l.href} className="sitemap-card">
+         <span className="sitemap-icon"><l.icon size={20}/></span>
+         <span><b>{l.label}</b><small>{l.description}</small></span>
+        </a>
+       )}
+      </div>
      </div>
     )}
    </main>
