@@ -6,6 +6,7 @@ const LEGAL_LINKS=[
  {href:"/privacy",label:"Privacy policy"},
  {href:"/cookies",label:"Cookies policy"},
  {href:"/terms",label:"Terms of use"},
+ {href:"/sitemap",label:"Sitemap"},
 ];
 
 export function StaticHeader(){
