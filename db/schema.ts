@@ -28,6 +28,9 @@ export const orders = sqliteTable("orders", {
   status: text("status").notNull().default("pending"),
   customerEmail: text("customer_email"),
   totalCents: integer("total_cents").notNull().default(0),
+  postcode: text("postcode"),
+  deliverySlot: text("delivery_slot"),
+  deliveryMethod: text("delivery_method"),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
@@ -41,4 +44,26 @@ export const orderItems = sqliteTable("order_items", {
   unitPriceCents: integer("unit_price_cents").notNull(),
   quantity: integer("quantity").notNull(),
   mode: text("mode").notNull().default("once"),
+});
+
+export const returnRequests = sqliteTable("return_requests", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  orderId: integer("order_id")
+    .notNull()
+    .references(() => orders.id),
+  orderItemId: integer("order_item_id").references(() => orderItems.id),
+  reason: text("reason").notNull(),
+  resolution: text("resolution").notNull().default("refund"),
+  status: text("status").notNull().default("requested"),
+  customerEmail: text("customer_email").notNull(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const feedbackIdeas = sqliteTable("feedback_ideas", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  details: text("details").notNull().default(""),
+  votes: integer("votes").notNull().default(0),
+  submitterEmail: text("submitter_email"),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
