@@ -88,7 +88,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:var(--cream)}
 .category-nav button.selected,.basket-summary>button,.detail-add,.hero-actions button:first-child,.section-hero>button{background:#354b45;color:white}.category-nav button{border-radius:9px}.catalogue-search,.catalogue-tools>div label,.choice{border-color:#d8d5cc}
 .editorial-hero{background:#656f63}.editorial-hero::after{background:linear-gradient(90deg,rgba(37,52,46,.88),rgba(37,52,46,.68) 32%,rgba(37,52,46,.1) 72%)}.editorial-hero h1{letter-spacing:-.055em;text-shadow:0 2px 18px #24332d44}.editorial-hero h1 i{color:#e9d7b4;font-style:italic}.editorial-hero .kicker{color:#f3e9d7}.editorial-hero .hero-actions button:first-child{background:#faf8f4;color:#30443e}.editorial-hero .hero-actions button:last-child{background:#30443e33}
 .repeat-hero{background:linear-gradient(105deg,#eef0e9 0%,#eef0e9 58%,#d9e2d7 58%,#e7ebe1 100%)}.hire-hero{background:linear-gradient(105deg,#f5ebe5 0%,#f5ebe5 58%,#e8d7cb 58%,#f2e3d9 100%)}
-.scroll-ribbon-length{background:linear-gradient(90deg,#354b45,#819087 23%,#e8ece3 43%,#e9d7b4 65%,#eedbd3 84%,#bfa397)}
+.scroll-ribbon-length{background:linear-gradient(90deg,rgba(53,75,69,.72),rgba(129,144,135,.72) 23%,rgba(232,236,227,.72) 43%,rgba(233,215,180,.72) 65%,rgba(238,219,211,.72) 84%,rgba(191,163,151,.72));backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 @media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(37,52,46,.94),rgba(37,52,46,.66) 42%,rgba(37,52,46,.08) 78%)}}
 
 /* The cover and footer share the same warm editorial colour story. */
