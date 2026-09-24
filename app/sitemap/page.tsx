@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {StaticHeader,StaticFooter} from "@/components/static-page-chrome";
-import {Home,ShoppingBasket,HelpCircle,RotateCcw,Lock,Cookie,FileText} from "lucide-react";
+import {Home,ShoppingBasket,HelpCircle,RotateCcw,Lock,Cookie,FileText,Users} from "lucide-react";
 
 export const metadata: Metadata={
  title:"Sitemap · Franklyn's Baby Supplies",
@@ -13,6 +13,12 @@ const SITEMAP_GROUPS=[
   links:[
    {href:"/",label:"Home",description:"Nappies, feeding, clothing, prams and more.",icon:Home},
    {href:"/#catalogue",label:"Shop all products",description:"Jump straight to the full catalogue.",icon:ShoppingBasket},
+  ],
+ },
+ {
+  heading:"Community",
+  links:[
+   {href:"/forum",label:"Community forum",description:"Ask a question and swap notes with other parents.",icon:Users},
   ],
  },
  {

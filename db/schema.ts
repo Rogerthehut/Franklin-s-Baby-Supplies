@@ -67,3 +67,23 @@ export const feedbackIdeas = sqliteTable("feedback_ideas", {
   submitterEmail: text("submitter_email"),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
+
+export const forumThreads = sqliteTable("forum_threads", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  category: text("category").notNull(),
+  title: text("title").notNull(),
+  body: text("body").notNull(),
+  authorName: text("author_name").notNull(),
+  replyCount: integer("reply_count").notNull().default(0),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const forumReplies = sqliteTable("forum_replies", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  threadId: integer("thread_id")
+    .notNull()
+    .references(() => forumThreads.id),
+  body: text("body").notNull(),
+  authorName: text("author_name").notNull(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
