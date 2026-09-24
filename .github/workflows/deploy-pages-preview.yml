@@ -35,6 +35,9 @@ jobs:
       - name: Build static preview
         run: npx vite build --config vite.pages-preview.config.ts
 
+      - name: Fall back unmatched paths to index.html
+        run: cp dist-pages-preview/index.html dist-pages-preview/404.html
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
