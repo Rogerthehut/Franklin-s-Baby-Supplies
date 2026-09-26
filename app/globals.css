@@ -117,6 +117,7 @@ footer button:hover,footer div>a:hover{text-decoration:underline;text-underline-
 .editorial-hero .hero-actions button:last-child{border-color:#354b45;color:#30443e;background:#faf8f4a3;backdrop-filter:blur(4px)}
 .hero-footer button{background:#faf8f4dd;border-color:#30443e66;color:#30443e}
 @media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(250,248,244,.98) 0%,rgba(250,248,244,.93) 39%,rgba(250,248,244,.18) 77%,transparent 100%)}}
+@media(min-width:781px){.editorial-hero .hero-actions button:first-child{background:#354b4599}.editorial-hero .hero-actions button:last-child{background:#faf8f45c}}
 
 /* Original light photographs need only a restrained legibility wash. */
 .hero-scene-everyday{background-image:url('/hero-light.webp')}
