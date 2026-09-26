@@ -234,7 +234,10 @@ footer button:hover,footer div>a:hover{text-decoration:underline;text-underline-
 
 /* Community forum: category filters, topic list and a single thread with replies. */
 .forum-main{max-width:760px}
-.forum-filters{display:flex;gap:9px;overflow:auto;padding-bottom:14px;margin:20px 0 24px;border-bottom:1px solid var(--line)}
+.forum-filters{display:flex;gap:9px;overflow:auto;padding-bottom:14px;margin:20px 0 24px;border-bottom:1px solid var(--line);scrollbar-width:thin;scrollbar-color:#354b4566 transparent}
+.forum-filters::-webkit-scrollbar{height:5px}
+.forum-filters::-webkit-scrollbar-track{background:transparent}
+.forum-filters::-webkit-scrollbar-thumb{background:#354b4566;border-radius:4px}
 @media(min-width:781px){.forum-filters{flex-wrap:wrap;overflow:visible}}
 .forum-filters button{padding:9px 15px;border-radius:9px;border:1px solid #cbd4e5;background:#fff;white-space:nowrap;font-weight:700;color:#576781;font-size:13px}
 .forum-filters button.selected{color:#fff;background:#354b45;border-color:#354b45}
