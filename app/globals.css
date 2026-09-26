@@ -128,7 +128,7 @@ footer button:hover,footer div>a:hover{text-decoration:underline;text-underline-
 @media(max-width:780px){.editorial-hero::after{background:linear-gradient(0deg,rgba(250,248,244,.84) 0%,rgba(250,248,244,.42) 43%,transparent 82%)}}
 /* Return the header emblem to Franklyn's original tilted square silhouette. */
 .wordmark-icon{position:relative;border-radius:13px;transform:rotate(-6deg);font-family:Arial,Helvetica,sans-serif;font-weight:800;letter-spacing:-.12em;background:#354b45}
-.wordmark-icon span{position:absolute;bottom:-39px;right:14%;color:#c99d80}
+.wordmark-icon span{position:absolute;bottom:-39px;right:59%;color:#c99d80}
 @media(max-width:1100px){.wordmark-icon span{bottom:-37px}}
 @media(max-width:600px){.wordmark-icon span{bottom:-33px}}
 
