@@ -129,6 +129,7 @@ footer button:hover,footer div>a:hover{text-decoration:underline;text-underline-
 /* Return the header emblem to Franklyn's original tilted square silhouette. */
 .wordmark-icon{border-radius:13px;transform:rotate(-6deg);font-family:Arial,Helvetica,sans-serif;font-weight:800;letter-spacing:-.12em;background:#354b45}
 .wordmark-icon span{color:#c99d80}
+@media(max-width:780px){.wordmark-icon span{position:relative;top:4px}}
 
 /* Delicate numbered markers from the supplied reference. */
 .journey-strip span{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;letter-spacing:.025em;color:#758f90;white-space:nowrap}
