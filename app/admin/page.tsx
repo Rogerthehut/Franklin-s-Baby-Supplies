@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { normalizeProductImage } from "../../lib/normalize-product-image";
 import "./admin.css";
 
 type Product = {
@@ -156,8 +157,9 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
     setUploading(true);
     setError("");
     try {
+      const framed = await normalizeProductImage(file);
       const body = new FormData();
-      body.append("file", file);
+      body.append("file", framed, "product.jpg");
       const res = await authedFetch("/api/upload", { method: "POST", body });
       const data = (await res.json()) as { key?: string; error?: string };
       if (!res.ok || !data.key) throw new Error(data.error ?? "Upload failed.");
@@ -335,6 +337,9 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                     }}
                   />
                 </label>
+                <small className="admin-image-hint">
+                  Framed on a cream backdrop to match the catalogue automatically; any photo works.
+                </small>
               </div>
 
               <div className="admin-field-grid">
