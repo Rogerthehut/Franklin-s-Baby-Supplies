@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 export const products = sqliteTable("products", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -69,6 +69,23 @@ export const feedbackIdeas = sqliteTable("feedback_ideas", {
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
+// One row per (idea, anonymous voter), so a vote is enforced server-side
+// instead of trusting whatever direction the client claims. voterId comes
+// from a cookie set on first vote, not an account, so it's a deterrent
+// against casual double-voting rather than a hard identity check.
+export const feedbackVotes = sqliteTable(
+  "feedback_votes",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    ideaId: integer("idea_id")
+      .notNull()
+      .references(() => feedbackIdeas.id),
+    voterId: text("voter_id").notNull(),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [uniqueIndex("feedback_votes_idea_voter_idx").on(table.ideaId, table.voterId)]
+);
+
 export const forumThreads = sqliteTable("forum_threads", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   category: text("category").notNull(),
@@ -127,3 +144,16 @@ export const customerBaskets = sqliteTable("customer_baskets", {
   linesJson: text("lines_json").notNull().default("[]"),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
+
+// Sliding-window rate limiting, keyed by an arbitrary bucket string (route +
+// caller IP). A Worker has no shared memory between requests, so this uses
+// D1 rather than an in-process counter; stale hits are pruned on read.
+export const rateLimitHits = sqliteTable(
+  "rate_limit_hits",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    bucket: text("bucket").notNull(),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [index("rate_limit_hits_bucket_idx").on(table.bucket)]
+);

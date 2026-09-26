@@ -2,6 +2,7 @@ import { desc, eq } from "drizzle-orm";
 import { getDb } from "../../../../db";
 import { forumThreads } from "../../../../db/schema";
 import { FORUM_CATEGORIES } from "../../../../lib/forum-categories";
+import { checkRateLimit, clientIp, rateLimitResponse } from "../../../../lib/rate-limit";
 
 export async function GET(request: Request) {
   try {
@@ -21,6 +22,11 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const db = getDb();
+    if (!(await checkRateLimit(db, `forum-thread:${clientIp(request)}`, 5, 600))) {
+      return rateLimitResponse();
+    }
+
     const payload = (await request.json()) as Record<string, unknown>;
     const category = String(payload.category ?? "").trim();
     const title = String(payload.title ?? "").trim();
@@ -40,7 +46,6 @@ export async function POST(request: Request) {
       return Response.json({ error: "Add your name, under 60 characters." }, { status: 400 });
     }
 
-    const db = getDb();
     const [thread] = await db
       .insert(forumThreads)
       .values({ category, title, body, authorName })

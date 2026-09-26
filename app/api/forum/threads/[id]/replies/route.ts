@@ -1,6 +1,7 @@
 import { eq, sql } from "drizzle-orm";
 import { getDb } from "../../../../../../db";
 import { forumReplies, forumThreads } from "../../../../../../db/schema";
+import { checkRateLimit, clientIp, rateLimitResponse } from "../../../../../../lib/rate-limit";
 
 export async function POST(
   request: Request,
@@ -11,6 +12,11 @@ export async function POST(
     const threadId = Number(id);
     if (!Number.isInteger(threadId) || threadId <= 0) {
       return Response.json({ error: "Invalid topic id." }, { status: 400 });
+    }
+
+    const db = getDb();
+    if (!(await checkRateLimit(db, `forum-reply:${clientIp(request)}`, 15, 600))) {
+      return rateLimitResponse();
     }
 
     const payload = (await request.json()) as Record<string, unknown>;
@@ -24,7 +30,6 @@ export async function POST(
       return Response.json({ error: "Add your name, under 60 characters." }, { status: 400 });
     }
 
-    const db = getDb();
     const [thread] = await db.select().from(forumThreads).where(eq(forumThreads.id, threadId));
     if (!thread) {
       return Response.json({ error: "That topic no longer exists." }, { status: 404 });

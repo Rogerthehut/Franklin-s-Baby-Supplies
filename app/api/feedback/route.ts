@@ -1,6 +1,7 @@
 import { desc } from "drizzle-orm";
 import { getDb } from "../../../db";
 import { feedbackIdeas } from "../../../db/schema";
+import { checkRateLimit, clientIp, rateLimitResponse } from "../../../lib/rate-limit";
 
 export async function GET() {
   try {
@@ -15,6 +16,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const db = getDb();
+    if (!(await checkRateLimit(db, `feedback-idea:${clientIp(request)}`, 10, 600))) {
+      return rateLimitResponse();
+    }
+
     const payload = (await request.json()) as Record<string, unknown>;
     const title = String(payload.title ?? "").trim();
     const details = String(payload.details ?? "").trim();
@@ -27,7 +33,6 @@ export async function POST(request: Request) {
       return Response.json({ error: "Keep the title under 120 characters." }, { status: 400 });
     }
 
-    const db = getDb();
     const [idea] = await db
       .insert(feedbackIdeas)
       .values({ title, details, submitterEmail })

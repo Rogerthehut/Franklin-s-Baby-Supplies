@@ -2,11 +2,17 @@ import { eq } from "drizzle-orm";
 import { getDb } from "../../../../db";
 import { customers } from "../../../../db/schema";
 import { createSession, hashPassword, isHttps } from "../../../../lib/auth";
+import { checkRateLimit, clientIp, rateLimitResponse } from "../../../../lib/rate-limit";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
   try {
+    const db = getDb();
+    if (!(await checkRateLimit(db, `signup:${clientIp(request)}`, 5, 600))) {
+      return rateLimitResponse();
+    }
+
     const payload = (await request.json()) as Record<string, unknown>;
     const email = String(payload.email ?? "").trim().toLowerCase();
     const password = String(payload.password ?? "");
@@ -19,7 +25,6 @@ export async function POST(request: Request) {
       return Response.json({ error: "Use a password of at least 8 characters." }, { status: 400 });
     }
 
-    const db = getDb();
     const [existing] = await db.select({ id: customers.id }).from(customers).where(eq(customers.email, email)).limit(1);
     if (existing) {
       return Response.json({ error: "An account with that email already exists. Try signing in instead." }, { status: 409 });
