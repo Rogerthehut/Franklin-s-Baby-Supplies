@@ -131,9 +131,11 @@ footer button:hover,footer div>a:hover{text-decoration:underline;text-underline-
 .wordmark-icon span{color:#c99d80}
 
 /* Delicate numbered markers from the supplied reference. */
-.journey-strip span{font-family:Georgia,'Times New Roman',serif;font-size:14px;font-weight:400;letter-spacing:.025em;color:#758f90;white-space:nowrap}
+.journey-strip span{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;letter-spacing:.025em;color:#758f90;white-space:nowrap}
 .journey-strip span::after{content:' /';font-family:Georgia,'Times New Roman',serif}
 .journey-strip-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:780px){.journey-strip span{font-size:19px}}
+@media(max-width:480px){.journey-strip span{font-size:16px}}
 
 /* Recolour the basket/status toast from the old navy to the new palette. */
 .toast{background:#30443e;box-shadow:0 10px 25px #1d2c2733}
