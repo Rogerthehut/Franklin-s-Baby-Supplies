@@ -152,9 +152,6 @@ footer button:hover,footer div>a:hover{text-decoration:underline;text-underline-
 .onboarding-back{border:0;background:none;color:#64716a;font-size:13px;font-weight:700}
 .onboarding-skip{border:0;background:none;color:#758f90;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;margin-left:auto}
 
-/* Delivery method note shown once a postcode is checked. */
-.delivery-method-note{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#354b45;background:#f1f4f0;border-radius:8px;padding:10px 12px;margin:14px 0 0}
-
 /* Returns & replacements wizard. */
 .returns-dialog{background:#fff!important;max-width:480px!important}
 .returns-step{display:grid;gap:14px;margin-top:6px}
