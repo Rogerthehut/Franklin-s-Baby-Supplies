@@ -235,6 +235,7 @@ footer button:hover,footer div>a:hover{text-decoration:underline;text-underline-
 /* Community forum: category filters, topic list and a single thread with replies. */
 .forum-main{max-width:760px}
 .forum-filters{display:flex;gap:9px;overflow:auto;padding-bottom:14px;margin:20px 0 24px;border-bottom:1px solid var(--line)}
+@media(min-width:781px){.forum-filters{flex-wrap:wrap;overflow:visible}}
 .forum-filters button{padding:9px 15px;border-radius:9px;border:1px solid #cbd4e5;background:#fff;white-space:nowrap;font-weight:700;color:#576781;font-size:13px}
 .forum-filters button.selected{color:#fff;background:#354b45;border-color:#354b45}
 .forum-start{display:inline-flex;align-items:center;gap:10px;background:#354b45;color:#fff;border:0;border-radius:9px;padding:13px 18px;font-weight:800;font-size:14px;margin-bottom:28px}
