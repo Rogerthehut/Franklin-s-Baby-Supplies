@@ -95,24 +95,24 @@ Once both secrets are set, the next push to `main` deploys automatically.
 ## Optional: Trustpilot reviews widget
 
 A Trustpilot "Mini" TrustBox is wired into the footer
-(`components/trustpilot-widget.tsx`), but stays hidden until it's configured —
+(`components/trustpilot-widget.tsx`), but stays hidden until it's configured;
 it needs a real Trustpilot Business account:
 
 1. Sign up at [business.trustpilot.com](https://business.trustpilot.com) and
    claim/verify your business.
 2. In the Trustpilot dashboard, find your **Business Unit ID** (under
    **Integrations → Widgets**, or in the URL of your Trustpilot profile page).
-3. Set two repository variables (not secrets — these values are public,
+3. Set two repository variables (not secrets; these values are public,
    they end up in the page HTML either way) at **Settings → Secrets and
    variables → Actions → Variables** on this GitHub repo:
-   - `VITE_TRUSTPILOT_BUSINESS_UNIT_ID` — the ID from step 2
-   - `VITE_TRUSTPILOT_REVIEW_URL` — your public Trustpilot review page,
+   - `VITE_TRUSTPILOT_BUSINESS_UNIT_ID`: the ID from step 2
+   - `VITE_TRUSTPILOT_REVIEW_URL`: your public Trustpilot review page,
      e.g. `https://www.trustpilot.com/review/franklynsbabysupplies.co.uk`
 4. For local dev, add the same two as `VITE_TRUSTPILOT_BUSINESS_UNIT_ID=...`
    and `VITE_TRUSTPILOT_REVIEW_URL=...` in a `.env.local` file at the repo
    root (already gitignored via `.env*`).
 
-Push to `main` (or rebuild locally) once set — the widget renders nothing at
+Push to `main` (or rebuild locally) once set; the widget renders nothing at
 all until `VITE_TRUSTPILOT_BUSINESS_UNIT_ID` is present, so there's no broken
 placeholder shown to customers in the meantime.
 

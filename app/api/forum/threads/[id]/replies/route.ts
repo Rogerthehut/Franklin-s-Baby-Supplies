@@ -18,7 +18,7 @@ export async function POST(
     const authorName = String(payload.authorName ?? "").trim();
 
     if (!body || body.length > 4000) {
-      return Response.json({ error: "Say a bit more — up to 4000 characters." }, { status: 400 });
+      return Response.json({ error: "Say a bit more: up to 4000 characters." }, { status: 400 });
     }
     if (!authorName || authorName.length > 60) {
       return Response.json({ error: "Add your name, under 60 characters." }, { status: 400 });

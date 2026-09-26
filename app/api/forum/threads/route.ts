@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       return Response.json({ error: "Give your topic a title, under 120 characters." }, { status: 400 });
     }
     if (!body || body.length > 4000) {
-      return Response.json({ error: "Say a bit more — up to 4000 characters." }, { status: 400 });
+      return Response.json({ error: "Say a bit more: up to 4000 characters." }, { status: 400 });
     }
     if (!authorName || authorName.length > 60) {
       return Response.json({ error: "Add your name, under 60 characters." }, { status: 400 });

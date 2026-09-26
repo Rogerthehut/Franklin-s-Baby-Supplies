@@ -74,7 +74,7 @@ export function ForumBoard(){
    }
    <div className="forum-list">
     {loading&&<p className="forum-empty">Loading topics…</p>}
-    {!loading&&!threads.length&&<p className="forum-empty">No topics here yet — be the first to start one.</p>}
+    {!loading&&!threads.length&&<p className="forum-empty">No topics here yet; be the first to start one.</p>}
     {threads.map(t=>
      <a className="forum-row" href={`/forum/${t.id}`} key={t.id}>
       <div>

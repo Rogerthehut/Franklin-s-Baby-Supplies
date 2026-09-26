@@ -8,7 +8,7 @@ const REVIEW_URL=import.meta.env.VITE_TRUSTPILOT_REVIEW_URL as string|undefined;
 
 declare global{interface Window{Trustpilot?:{loadFromElement:(el:Element,forceReload?:boolean)=>void}}}
 
-// Mini TrustBox — Trustpilot's fixed public template id for this widget style,
+// Mini TrustBox: Trustpilot's fixed public template id for this widget style,
 // the same for every business, not an account-specific value.
 const TEMPLATE_ID="53aa8807dec7e10d38f59f32";
 

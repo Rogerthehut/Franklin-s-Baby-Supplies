@@ -47,7 +47,7 @@ export function AccountAuth({onAuthed}:{onAuthed:(customer:Customer)=>void}){
     <button className="detail-add" disabled={submitting||!email.trim()||!passwordOk} onClick={submit}>{submitting?"Please wait…":mode==="login"?"Sign in":"Create account"} <ArrowRight size={17}/></button>
    </div>
    <button className="account-auth-switch" onClick={()=>{setMode(mode==="login"?"signup":"login");setError("")}}>{mode==="login"?"New here? Create an account":"Already have an account? Sign in"}</button>
-   <p className="account-auth-guest">You don't need an account to shop — guest checkout is always available.</p>
+   <p className="account-auth-guest">You don't need an account to shop; guest checkout is always available.</p>
   </div>
  );
 }

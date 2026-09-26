@@ -69,7 +69,7 @@ export function FeedbackBoard(){
    </div>
    <div className="feedback-list">
     {loading&&<p className="feedback-empty">Loading ideas…</p>}
-    {!loading&&!ideas.length&&<p className="feedback-empty">No ideas yet — be the first to suggest something.</p>}
+    {!loading&&!ideas.length&&<p className="feedback-empty">No ideas yet; be the first to suggest something.</p>}
     {ideas.map(idea=>
      <div className="feedback-row" key={idea.id}>
       <button className={`feedback-vote${votedIds.includes(idea.id)?" voted":""}`} onClick={()=>vote(idea)} aria-label={votedIds.includes(idea.id)?"Remove your vote":"Vote for this idea"}>

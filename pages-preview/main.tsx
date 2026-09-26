@@ -37,7 +37,7 @@ function normalizedPath(pathname: string): string {
   return path || "/";
 }
 
-const PREVIEW_MESSAGE = "Concept preview — this needs the live backend to work.";
+const PREVIEW_MESSAGE = "Concept preview: this needs the live backend to work.";
 
 // Paths that are only reachable via a real backend, which this static build
 // doesn't have. There's no meaningful page to show for these, so link clicks
@@ -47,7 +47,7 @@ const BACKEND_ONLY_PATHS = ["/admin"];
 
 // Background writes that already fail silently by design (an optimistic
 // heart-toggle, an autosaved basket, a vote, a logout that already cleared
-// local state regardless) shouldn't also throw a toast on every occurrence —
+// local state regardless) shouldn't also throw a toast on every occurrence:
 // that would just be noise. Checkout already shows its own clear toast on
 // failure. Everything else that mutates data (a deliberate "submit" click)
 // is worth surfacing.
@@ -93,7 +93,7 @@ function App() {
     // (href="/faq"). Under this preview's "/Franklyn-s-Baby-Supplies/"
     // subpath the same href would escape the site entirely if followed as a
     // normal navigation, so this rewrites it to a same-app URL and updates
-    // the page purely client-side — no full reload, no dependency on the
+    // the page purely client-side: no full reload, no dependency on the
     // GitHub Pages 404 fallback for a click that never has to leave the app.
     function onClick(event: MouseEvent) {
       if (event.defaultPrevented || event.button !== 0) return;
@@ -110,7 +110,7 @@ function App() {
       }
 
       if (!(normalizedPath(path) in PAGES)) {
-        // Not one of this preview's SPA pages — e.g. the real /sitemap.xml
+        // Not one of this preview's SPA pages, e.g. the real /sitemap.xml
         // file linked from the sitemap page's body text. Let it actually
         // load rather than rendering it as a page, just with the base path
         // fixed up so it doesn't escape the site's subpath.
